@@ -8,11 +8,13 @@ The input will come from a textarea inserted into the DOM (see code below to
 insert the elements), and conversion will happen when the button is pressed.
 Test data (pasted to textarea, including spaces):
 
-underscore_case
-  first_name
-Some_Variable
-   calculate_AGE
-delayed_departure
+
+//! COPY
+  underscore_case
+    first_name
+  Some_Variable
+    calculate_AGE
+  delayed_departure
 
 Should produce this output (5 separate console.log outputs):
 
@@ -36,26 +38,16 @@ document.body.append(document.createElement('button'));
 
 document.querySelector('button').addEventListener('click', function () {
   const text = document.querySelector('textarea').value;
-  // Selecting Lines \n
   const lines = text.split('\n');
-  // Trimming the lines
   const trimmed = [];
   for (const trim of lines) {
-    let trimmedLines = trim.trim();
-    trimmed.push(trimmedLines);
+    let edited = trim.trim().toLocaleLowerCase().split('_');
+    trimmed.push(edited);
   }
-  // Lower Cases
-  const lowerCases = [];
-  for (const sCases of trimmed) {
-    let lowerCasesLines = sCases.toLocaleLowerCase();
-    lowerCases.push(lowerCasesLines);
-  }
-  // Splitting the under score
-  const cCases = function (lowerCases) {
+  const cCases = function (trimmed) {
     const endArray = [];
-    for (const split of lowerCases) {
-      let split2 = split.split('_');
-      const [firstName, lastName] = split2;
+    for (const split of trimmed) {
+      const [firstName, lastName] = split;
       const lastNameC = lastName[0].toUpperCase() + lastName.slice(1);
       const endName = firstName + lastNameC;
       endArray.push(endName);
@@ -76,16 +68,13 @@ document.querySelector('button').addEventListener('click', function () {
       let paddedNames = pad.padEnd(maximumLength + 2, ' ');
       endArrayV2.push(paddedNames);
     }
-    // console.log(endArrayV2);
 
-    for (let i = 0; i < endArrayV2.length; i++) {
-      console.log(endArrayV2[i] + '✅'.repeat(i + 1) + '\n');
+    // for (let i = 0; i < endArrayV2.length; i++) {
+    //   console.log(endArrayV2[i] + '✅'.repeat(i + 1) + '\n');
+    // }
+    for (const [i, m] of endArrayV2.entries()) {
+      console.log(m + '✅'.repeat(i + 1) + '\n');
     }
-    // Print the names with the emoji
   };
-
-  cCases(lowerCases);
+  cCases(trimmed);
 });
-
-// const text =
-//   ' underscore_case\n   first_name\n Some_Variable\n   calculate_AGE\n delayed_departure';
