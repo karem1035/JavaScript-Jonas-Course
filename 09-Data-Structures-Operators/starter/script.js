@@ -51,9 +51,9 @@ document.querySelector('button').addEventListener('click', function () {
     lowerCases.push(lowerCasesLines);
   }
   // Splitting the under score
-  const cCases = function (inputedArray) {
+  const cCases = function (lowerCases) {
     const endArray = [];
-    for (const split of inputedArray) {
+    for (const split of lowerCases) {
       let split2 = split.split('_');
       const [firstName, lastName] = split2;
       const lastNameC = lastName[0].toUpperCase() + lastName.slice(1);
