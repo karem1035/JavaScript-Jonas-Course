@@ -8,6 +8,7 @@ The input will come from a textarea inserted into the DOM (see code below to
 insert the elements), and conversion will happen when the button is pressed.
 Test data (pasted to textarea, including spaces):
 
+<<<<<<< HEAD
 
 //! COPY
   underscore_case
@@ -16,6 +17,14 @@ Test data (pasted to textarea, including spaces):
     calculate_AGE
   delayed_departure
 
+=======
+underscore_case
+  first_name
+Some_Variable
+   calculate_AGE
+delayed_departure
+
+>>>>>>> refs/remotes/origin/main
 Should produce this output (5 separate console.log outputs):
 
 underscoreCase     ✅
@@ -38,6 +47,7 @@ document.body.append(document.createElement('button'));
 
 document.querySelector('button').addEventListener('click', function () {
   const text = document.querySelector('textarea').value;
+<<<<<<< HEAD
   const lines = text.split('\n');
   const trimmed = [];
   for (const trim of lines) {
@@ -48,6 +58,28 @@ document.querySelector('button').addEventListener('click', function () {
     const endArray = [];
     for (const split of trimmed) {
       const [firstName, lastName] = split;
+=======
+  // Selecting Lines \n
+  const lines = text.split('\n');
+  // Trimming the lines
+  const trimmed = [];
+  for (const trim of lines) {
+    let trimmedLines = trim.trim();
+    trimmed.push(trimmedLines);
+  }
+  // Lower Cases
+  const lowerCases = [];
+  for (const sCases of trimmed) {
+    let lowerCasesLines = sCases.toLocaleLowerCase();
+    lowerCases.push(lowerCasesLines);
+  }
+  // Splitting the under score
+  const cCases = function (inputedArray) {
+    const endArray = [];
+    for (const split of inputedArray) {
+      let split2 = split.split('_');
+      const [firstName, lastName] = split2;
+>>>>>>> refs/remotes/origin/main
       const lastNameC = lastName[0].toUpperCase() + lastName.slice(1);
       const endName = firstName + lastNameC;
       endArray.push(endName);
@@ -68,6 +100,7 @@ document.querySelector('button').addEventListener('click', function () {
       let paddedNames = pad.padEnd(maximumLength + 2, ' ');
       endArrayV2.push(paddedNames);
     }
+<<<<<<< HEAD
 
     // for (let i = 0; i < endArrayV2.length; i++) {
     //   console.log(endArrayV2[i] + '✅'.repeat(i + 1) + '\n');
@@ -78,3 +111,18 @@ document.querySelector('button').addEventListener('click', function () {
   };
   cCases(trimmed);
 });
+=======
+    // console.log(endArrayV2);
+
+    for (let i = 0; i < endArrayV2.length; i++) {
+      console.log(endArrayV2[i] + '✅'.repeat(i + 1) + '\n');
+    }
+    // Print the names with the emoji
+  };
+
+  cCases(lowerCases);
+});
+
+// const text =
+//   ' underscore_case\n   first_name\n Some_Variable\n   calculate_AGE\n delayed_departure';
+>>>>>>> refs/remotes/origin/main
