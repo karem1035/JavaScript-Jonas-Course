@@ -1,0 +1,25 @@
+JS Fundamentals 2
+Coding Challenge #2
+
+- define 3 arrays bills , tips ,and totals
+
+- create calcTip function
+
+  - take bill value as input
+  - if billValue >= 50 and <= 300 , billValue \* 0.15
+  - else billValue \* 0.2
+  - return tip value (result)
+
+- create a for loop to pass the bills value ti calcTip function
+
+  - i = 0 , i < bills.length , i++
+    -call calcTip(bill[i])
+    -push the value to the tips array
+    -push tips[i] + bills[i] to the total array
+
+- create a calcAverage function
+  - average = sum of totals array / totals.length
+  - create a for loop to pass total values to sum it
+    - i = 0 , i < totals.length
+    - sum += arr[i]
+  - return (final sum / totals.length)
