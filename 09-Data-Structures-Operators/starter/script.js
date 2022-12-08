@@ -1,70 +1,91 @@
 'use strict';
 
-const briefIntroduction = function ({
-  name = 'your name',
-  age = '20s',
-  job = 'Developer',
-  address = 'Cairo Egypt',
-}) {
-  console.log(
-    `Hello , my name is ${name} , I am ${age} I am ${job} I live in ${address}`
-  );
-};
-
-const infos = {
-  name: 'Karem',
-  age: 23,
-  job: 'Web Developer',
-};
-
-briefIntroduction(infos);
-
+//! Coding Challenge #4
 /*
+Write a program that receives a list of variable names written in underscore_case
+and convert them to camelCase.
+The input will come from a textarea inserted into the DOM (see code below to
+insert the elements), and conversion will happen when the button is pressed.
+Test data (pasted to textarea, including spaces):
 
-const arr = [0, 2, 1];
-let [, one, two] = arr;
-console.log(one, two);
-[one, two] = [two, one];
-console.log(one, two);
+underscore_case
+  first_name
+Some_Variable
+   calculate_AGE
+delayed_departure
 
-// Data needed for a later exercise
-const flights =
-  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+Should produce this output (5 separate console.log outputs):
 
-// Data needed for first part of the section
-const restaurant = {
-  name: 'Classico Italiano',
-  location: 'Via Angelo Tavanti 23, Firenze, Italy',
-  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
-  order: function (starterIndex, menuIndex) {
-    return [this.starterMenu[starterIndex], this.mainMenu[menuIndex]];
-  },
-};
-
-const [pizza1, pizza2] = restaurant.order(1, 2);
-// console.log(pizza1, pizza2);
-
-const oddNumbers = [1, 3, 5, [7, 9, 11]];
-const [i, j, , f] = oddNumbers;
-const [a, b, , [c, d]] = oddNumbers;
-console.log(i, j, f);
-console.log(a, b, c, d);
-
+underscoreCase     ✅
+firstName         ✅✅
+someVariable      ✅✅✅
+calculateAge      ✅✅✅✅
+delayedDeparture ✅✅✅✅✅
+Hints:
+§ Remember which character defines a new line in the textarea 😉
+§ The solution only needs to work for a variable made out of 2 words, like a_b
+§ Start without worrying about the ✅. Tackle that only after you have the variable
+name conversion working 😉
+§ This challenge is difficult on purpose, so start watching the solution in case
+you're stuck. Then pause and continue!
+Afterwards, test with your own test data!
+GOOD LUCK 😀
 */
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  // Selecting Lines \n
+  const lines = text.split('\n');
+  // Trimming the lines
+  const trimmed = [];
+  for (const trim of lines) {
+    let trimmedLines = trim.trim();
+    trimmed.push(trimmedLines);
+  }
+  // Lower Cases
+  const lowerCases = [];
+  for (const sCases of trimmed) {
+    let lowerCasesLines = sCases.toLocaleLowerCase();
+    lowerCases.push(lowerCasesLines);
+  }
+  // Splitting the under score
+  const cCases = function (inputedArray) {
+    const endArray = [];
+    for (const split of inputedArray) {
+      let split2 = split.split('_');
+      const [firstName, lastName] = split2;
+      const lastNameC = lastName[0].toUpperCase() + lastName.slice(1);
+      const endName = firstName + lastNameC;
+      endArray.push(endName);
+    }
+    // Finding Maximum length
+    // console.log(endArray);
+    let maximumLength = 0;
+    for (const len of endArray) {
+      maximumLength < len.length
+        ? (maximumLength = len.length)
+        : (maximumLength = maximumLength);
+    }
+    // console.log(maximumLength);
+
+    // padding to the maximum length +2
+    const endArrayV2 = [];
+    for (const pad of endArray) {
+      let paddedNames = pad.padEnd(maximumLength + 2, ' ');
+      endArrayV2.push(paddedNames);
+    }
+    // console.log(endArrayV2);
+
+    for (let i = 0; i < endArrayV2.length; i++) {
+      console.log(endArrayV2[i] + '✅'.repeat(i + 1) + '\n');
+    }
+    // Print the names with the emoji
+  };
+
+  cCases(lowerCases);
+});
+
+// const text =
+//   ' underscore_case\n   first_name\n Some_Variable\n   calculate_AGE\n delayed_departure';
